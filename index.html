@@ -1,103 +1,2494 @@
-<!doctype html>
+```html
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>StudyFlow — Homework Planner</title>
-<style>
-:root{--bg:#f4f6fb;--surface:#fff;--text:#1f2937;--muted:#687386;--line:#e5e9f1;--primary:#60769d;--primary2:#4f6388;--sage:#dcecdf;--sageText:#35634a;--coral:#f4c7bc;--coralText:#9a4437;--amber:#f6dfad;--amberText:#8a6419;--shadow:0 10px 30px rgba(44,58,85,.08);--radius:18px}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,select{font:inherit} button{cursor:pointer;border:0}.app{display:grid;grid-template-columns:235px 1fr;min-height:100vh}.sidebar{background:var(--surface);border-right:1px solid var(--line);padding:26px 18px;position:sticky;top:0;height:100vh}.brand{font-weight:800;font-size:21px;letter-spacing:-.5px;display:flex;align-items:center;gap:9px;margin:0 8px 34px}.logo{width:30px;height:30px;border-radius:9px;background:var(--primary);display:grid;place-items:center;color:#fff}.nav button{width:100%;text-align:left;background:transparent;color:var(--muted);padding:12px 13px;border-radius:11px;margin:2px 0}.nav button.active,.nav button:hover{background:#eef2f8;color:var(--primary2);font-weight:700}.side-note{position:absolute;bottom:25px;left:18px;right:18px;background:#eef2f8;border-radius:14px;padding:13px;color:var(--muted);font-size:12px}.main{padding:28px clamp(18px,4vw,48px);max-width:1450px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:24px}.eyebrow{color:var(--muted);font-size:13px;margin-bottom:4px}.title{font-size:clamp(25px,3vw,34px);font-weight:800;letter-spacing:-1px;margin:0}.actions{display:flex;gap:9px;align-items:center}.iconbtn,.primary{border-radius:11px;padding:10px 13px}.iconbtn{background:var(--surface);border:1px solid var(--line);color:var(--text)}.primary{background:var(--primary);color:#fff;font-weight:700}.primary:hover{background:var(--primary2)}.grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(290px,.7fr);gap:18px}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:19px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}.stat{padding:16px;border:1px solid var(--line);border-radius:15px;background:var(--surface)}.stat b{font-size:24px;display:block}.stat span{color:var(--muted);font-size:12px}.progress{height:9px;background:#e9edf4;border-radius:20px;overflow:hidden;margin:10px 0 5px}.progress i{display:block;height:100%;background:var(--primary);border-radius:inherit;transition:.3s}.summary{display:flex;justify-content:space-between;gap:15px;align-items:center}.warning{background:#fff6e5;color:#795716;border:1px solid #f0dfb9;padding:9px 12px;border-radius:10px;font-size:12px}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.sectionhead h2{font-size:17px;margin:0}.task{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:start;padding:15px 4px;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0}.check{appearance:none;width:20px;height:20px;border:2px solid #bbc4d2;border-radius:6px;margin-top:2px}.check:checked{background:var(--primary);border-color:var(--primary);box-shadow:inset 0 0 0 4px #fff}.task.done .taskname{text-decoration:line-through;color:#8a93a2}.taskname{font-weight:750}.meta{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px;color:var(--muted);font-size:12px}.pill{padding:3px 8px;border-radius:20px;background:#edf1f6}.pill.high{background:var(--coral);color:var(--coralText)}.pill.medium{background:var(--amber);color:var(--amberText)}.pill.low{background:var(--sage);color:var(--sageText)}.taskactions{display:flex;gap:4px}.taskactions button{background:transparent;color:var(--muted);padding:6px;border-radius:8px}.taskactions button:hover{background:#eef2f8}.timer{margin-top:9px;display:flex;align-items:center;gap:7px}.timer button{background:#edf1f6;color:var(--primary2);padding:6px 9px;border-radius:8px;font-size:12px;font-weight:700}.timer span{font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.day{min-height:94px;background:#f8f9fc;border:1px solid var(--line);border-radius:11px;padding:8px;font-size:11px}.day b{font-size:12px}.event{margin-top:6px;padding:5px;border-radius:7px;background:#e8edf6;color:#4e6285;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.exam{margin-top:4px;color:#9a4437}.streak{display:flex;align-items:center;gap:14px}.flame{font-size:34px}.streak b{font-size:28px}.modal{position:fixed;inset:0;background:rgba(25,33,48,.4);display:none;place-items:center;padding:18px;z-index:5}.modal.open{display:grid}.dialog{width:min(560px,100%);background:var(--surface);border-radius:20px;padding:21px}.form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:grid;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:var(--muted);font-weight:700}.field input,.field select{width:100%;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--text)}.dialogfoot{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.empty{padding:30px;text-align:center;color:var(--muted)}body.dark{--bg:#111722;--surface:#192130;--text:#eef2f7;--muted:#aab4c4;--line:#2a3445;--shadow:0 12px 32px rgba(0,0,0,.2)}body.dark .nav button.active,body.dark .nav button:hover,body.dark .iconbtn,body.dark .timer button,body.dark .pill{background:#232d3d}body.dark .day{background:#151d2a}body.dark .warning{background:#332b1d;color:#e8c77e;border-color:#5b4a2b}
-@media(max-width:900px){.app{grid-template-columns:1fr}.sidebar{height:auto;position:static;padding:14px 16px;border-right:0;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}.brand{margin:0}.nav{display:flex;overflow:auto;flex:1}.nav button{white-space:nowrap;width:auto}.side-note{display:none}.grid{grid-template-columns:1fr}}@media(max-width:600px){.main{padding:18px 13px}.top{align-items:center}.actions .label{display:none}.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}.calendar{gap:3px}.day{min-height:75px;padding:5px;font-size:10px}.event{font-size:9px;padding:3px}.form{grid-template-columns:1fr}.field.full{grid-column:auto}.summary{align-items:flex-start;flex-direction:column}.task{grid-template-columns:auto 1fr}.taskactions{grid-column:2}.timer{flex-wrap:wrap}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyFlow</title>
+
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --card: #ffffff;
+      --soft: #f8f9fc;
+      --text: #202938;
+      --muted: #718096;
+      --border: #e3e8f0;
+      --primary: #60769d;
+      --primary-dark: #4e6388;
+      --primary-soft: #eaf0f8;
+      --sage: #dcecdf;
+      --sage-text: #35634a;
+      --amber: #f6dfad;
+      --amber-text: #86641d;
+      --coral: #f4c7bc;
+      --coral-text: #96453a;
+      --danger: #d85b5b;
+      --shadow: 0 10px 30px rgba(40, 55, 80, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    body.dark {
+      --bg: #111722;
+      --card: #192130;
+      --soft: #151d2a;
+      --text: #f0f3f7;
+      --muted: #aab4c4;
+      --border: #2c3749;
+      --primary: #8298bd;
+      --primary-dark: #a4b5d1;
+      --primary-soft: #26334a;
+      --sage: #243b2d;
+      --sage-text: #a9d4b6;
+      --amber: #40351e;
+      --amber-text: #e9ca7c;
+      --coral: #452c2a;
+      --coral-text: #f0a99f;
+      --shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    /* ---------- Layout ---------- */
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 235px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 26px 18px;
+      background: var(--card);
+      border-right: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 8px 34px;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .brand-icon {
+      width: 31px;
+      height: 31px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .nav button {
+      width: 100%;
+      padding: 12px;
+      border: 0;
+      border-radius: 11px;
+      background: transparent;
+      color: var(--muted);
+      text-align: left;
+    }
+
+    .nav button:hover,
+    .nav button.active {
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .side-tip {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 25px;
+      padding: 13px;
+      border-radius: 14px;
+      background: var(--primary-soft);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .main {
+      width: 100%;
+      max-width: 1450px;
+      margin: auto;
+      padding: 28px clamp(18px, 4vw, 48px);
+    }
+
+    /* ---------- Header ---------- */
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow {
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(25px, 3vw, 35px);
+      line-height: 1.15;
+      letter-spacing: -1px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 9px;
+    }
+
+    .button,
+    .icon-button {
+      border-radius: 11px;
+      padding: 10px 13px;
+      transition: 0.2s ease;
+    }
+
+    .primary {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      font-weight: 700;
+    }
+
+    .primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .secondary,
+    .icon-button {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .secondary:hover,
+    .icon-button:hover {
+      background: var(--primary-soft);
+    }
+
+    /* ---------- Stats ---------- */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .stat {
+      min-height: 115px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .stat-value {
+      display: block;
+      margin-top: 4px;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .progress-track {
+      height: 9px;
+      margin-top: 11px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--primary-soft);
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .warning {
+      display: inline-block;
+      margin-top: 7px;
+      padding: 6px 9px;
+      border-radius: 8px;
+      background: #fff4dd;
+      color: #795716;
+      font-size: 11px;
+    }
+
+    body.dark .warning {
+      background: #3b311e;
+      color: #e8c979;
+    }
+
+    .streak {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .flame {
+      font-size: 30px;
+    }
+
+    /* ---------- Content ---------- */
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(290px, 0.7fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 19px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .card + .card {
+      margin-top: 18px;
+    }
+
+    .heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .heading h2 {
+      margin: 0;
+      font-size: 17px;
+    }
+
+    .count {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* ---------- Tasks ---------- */
+
+    .task {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 13px;
+      align-items: start;
+      padding: 15px 4px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .task:last-child {
+      border-bottom: 0;
+    }
+
+    .checkbox {
+      appearance: none;
+      width: 21px;
+      height: 21px;
+      margin-top: 2px;
+      border: 2px solid #b9c2d0;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .checkbox:checked {
+      border-color: var(--primary);
+      background: var(--primary);
+      box-shadow: inset 0 0 0 4px var(--card);
+    }
+
+    .task-name {
+      font-weight: 750;
+    }
+
+    .task.completed .task-name {
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .task-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+    }
+
+    .pill.high {
+      background: var(--coral);
+      color: var(--coral-text);
+    }
+
+    .pill.medium {
+      background: var(--amber);
+      color: var(--amber-text);
+    }
+
+    .pill.low {
+      background: var(--sage);
+      color: var(--sage-text);
+    }
+
+    .task-actions {
+      display: flex;
+      gap: 3px;
+    }
+
+    .task-actions button {
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--muted);
+    }
+
+    .task-actions button:hover {
+      background: var(--primary-soft);
+      color: var(--text);
+    }
+
+    .task-actions .delete:hover {
+      color: var(--danger);
+    }
+
+    .focus-task {
+      margin-top: 9px;
+      padding: 6px 9px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .empty {
+      padding: 35px 15px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* ---------- Calendar ---------- */
+
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+
+    .day {
+      min-height: 95px;
+      padding: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: var(--soft);
+      font-size: 11px;
+    }
+
+    .day.today {
+      border-color: var(--primary);
+    }
+
+    .day-name {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .day-number {
+      font-weight: 800;
+    }
+
+    .event {
+      margin-top: 6px;
+      padding: 4px 5px;
+      overflow: hidden;
+      border-radius: 6px;
+      background: var(--primary-soft);
+      color: var(--primary-dark);
+      font-size: 9px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* ---------- Timer ---------- */
+
+    .timer-description {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .timer {
+      margin: 20px 0 5px;
+      text-align: center;
+      font-size: 48px;
+      font-weight: 850;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 2px;
+    }
+
+    .timer-mode {
+      margin-bottom: 16px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .timer-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .timer-controls button {
+      flex: 1;
+    }
+
+    /* ---------- Modal ---------- */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(20, 29, 43, 0.55);
+    }
+
+    .modal-backdrop.open {
+      display: grid;
+    }
+
+    .modal {
+      width: min(570px, 100%);
+      max-height: calc(100vh - 36px);
+      overflow-y: auto;
+      padding: 21px;
+      border-radius: 20px;
+      background: var(--card);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 17px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      padding: 10px 11px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      background: var(--card);
+      color: var(--text);
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-soft);
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    /* ---------- Responsive ---------- */
+
+    @media (max-width: 900px) {
+      .app {
+        display: block;
+      }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 13px 16px;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .brand {
+        margin: 0;
+      }
+
+      .nav {
+        flex: 1;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+
+      .nav button {
+        width: auto;
+        white-space: nowrap;
+      }
+
+      .side-tip {
+        display: none;
+      }
+
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .main {
+        padding: 18px 13px;
+      }
+
+      .topbar {
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .task {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      .task-actions {
+        grid-column: 2;
+      }
+
+      .calendar {
+        gap: 3px;
+      }
+
+      .day {
+        min-height: 74px;
+        padding: 5px;
+      }
+
+      .event {
+        font-size: 8px;
+        padding: 3px;
+      }
+
+      .timer {
+        font-size: 42px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="app">
-<aside class="sidebar">
-  <div class="brand"><span class="logo">✓</span>StudyFlow</div>
-  <nav class="nav">
-    <button class="active">Today</button><button>Calendar</button><button>Completed</button>
-  </nav>
-  <div class="side-note">Tip: keep tonight's plan realistic. A focused 25 minutes beats an hour of distracted studying.</div>
-</aside>
-<main class="main">
-  <header class="top">
-    <div><div class="eyebrow" id="todayLabel"></div><h1 class="title">Good afternoon. Let's make progress.</h1></div>
-    <div class="actions"><button class="iconbtn" id="themeBtn" title="Toggle dark mode">◐</button><button class="primary" id="addBtn"><span class="label">+ Add assignment</span><span class="mobilePlus">+</span></button></div>
-  </header>
-  <section class="stats">
-    <div class="stat"><span>Today's study time</span><b id="timeStat">0h 00m</b><div id="warning"></div></div>
-    <div class="stat"><span>Daily progress</span><b id="progressStat">0%</b><div class="progress"><i id="progressBar"></i></div></div>
-    <div class="stat"><span>Homework streak</span><div class="streak"><span class="flame">🔥</span><b id="streak">0 days</b></div></div>
-  </section>
-  <div class="grid">
-    <section class="card">
-      <div class="sectionhead"><h2>Smart checklist</h2><span class="eyebrow" id="countLabel"></span></div>
-      <div id="taskList"></div>
-    </section>
-    <aside>
-      <section class="card" style="margin-bottom:18px"><div class="sectionhead"><h2>This week</h2></div><div class="calendar" id="calendar"></div></section>
-      <section class="card"><div class="sectionhead"><h2>Focus mode</h2></div><p style="color:var(--muted);margin-top:0">Pick a task and start a 25-minute focus session. A 5-minute break follows.</p><div id="activeTimer" style="font-size:38px;font-weight:800;text-align:center;margin:15px 0;font-variant-numeric:tabular-nums">25:00</div><button class="primary" style="width:100%" id="focusBtn">Start focus session</button></section>
+
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="brand">
+        <span class="brand-icon">✓</span>
+        <span>StudyFlow</span>
+      </div>
+
+      <nav class="nav">
+        <button class="active" data-view="today" type="button">
+          Today
+        </button>
+
+        <button data-view="calendar" type="button">
+          Calendar
+        </button>
+
+        <button data-view="completed" type="button">
+          Completed
+        </button>
+      </nav>
+
+      <div class="side-tip">
+        <strong>Study tip</strong><br />
+        A focused 25 minutes beats an hour of distracted studying.
+      </div>
+
     </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <header class="topbar">
+
+        <div>
+          <div class="eyebrow" id="todayLabel"></div>
+          <h1>Good afternoon. Let's make progress.</h1>
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="icon-button"
+            id="darkModeButton"
+            type="button"
+            title="Toggle dark mode"
+            aria-label="Toggle dark mode"
+          >
+            ◐
+          </button>
+
+          <button
+            class="button primary"
+            id="addAssignmentButton"
+            type="button"
+          >
+            + <span class="add-label">Add assignment</span>
+          </button>
+
+        </div>
+
+      </header>
+
+      <!-- STATISTICS -->
+      <section class="stats">
+
+        <div class="stat">
+          <span class="stat-label">
+            Today's study time
+          </span>
+
+          <span
+            class="stat-value"
+            id="studyTime"
+          >
+            0h 00m
+          </span>
+
+          <div id="workloadWarning"></div>
+        </div>
+
+        <div class="stat">
+
+          <span class="stat-label">
+            Daily progress
+          </span>
+
+          <span
+            class="stat-value"
+            id="progressText"
+          >
+            0%
+          </span>
+
+          <div class="progress-track">
+            <div
+              class="progress-bar"
+              id="progressBar"
+            ></div>
+          </div>
+
+        </div>
+
+        <div class="stat">
+
+          <span class="stat-label">
+            Homework streak
+          </span>
+
+          <div class="streak">
+            <span class="flame">🔥</span>
+
+            <span
+              class="stat-value"
+              id="streakText"
+            >
+              0 days
+            </span>
+          </div>
+
+        </div>
+
+      </section>
+
+      <div class="content-grid">
+
+        <!-- CHECKLIST -->
+        <section
+          class="card"
+          id="checklistSection"
+        >
+
+          <div class="heading">
+
+            <h2>Smart checklist</h2>
+
+            <span
+              class="count"
+              id="taskCount"
+            >
+              0 assignments
+            </span>
+
+          </div>
+
+          <div id="taskList"></div>
+
+        </section>
+
+        <aside>
+
+          <!-- CALENDAR -->
+          <section
+            class="card"
+            id="calendarSection"
+          >
+
+            <div class="heading">
+              <h2>This week</h2>
+            </div>
+
+            <div
+              class="calendar"
+              id="calendar"
+            ></div>
+
+          </section>
+
+          <!-- POMODORO -->
+          <section class="card">
+
+            <div class="heading">
+              <h2>Focus mode</h2>
+            </div>
+
+            <p class="timer-description">
+              Study for 25 minutes, then take a 5-minute break.
+            </p>
+
+            <div
+              class="timer"
+              id="timerDisplay"
+            >
+              25:00
+            </div>
+
+            <div
+              class="timer-mode"
+              id="timerMode"
+            >
+              Ready to focus
+            </div>
+
+            <div class="timer-controls">
+
+              <button
+                class="button primary"
+                id="timerStartButton"
+                type="button"
+              >
+                Start
+              </button>
+
+              <button
+                class="button secondary"
+                id="timerResetButton"
+                type="button"
+              >
+                Reset
+              </button>
+
+            </div>
+
+          </section>
+
+        </aside>
+
+      </div>
+
+    </main>
+
   </div>
-</main>
-</div>
-<div class="modal" id="modal"><div class="dialog"><div class="sectionhead"><h2 id="modalTitle">Add assignment</h2><button class="iconbtn" id="closeModal">×</button></div>
-<form id="taskForm" class="form">
-<input type="hidden" id="taskId">
-<div class="field"><label>Subject</label><input id="subject" list="subjects" required placeholder="e.g. Biology"><datalist id="subjects"><option>Math</option><option>English</option><option>Science</option><option>History</option><option>Language</option><option>Art</option></datalist></div>
-<div class="field"><label>Assignment name</label><input id="name" required placeholder="e.g. Chapter 4 worksheet"></div>
-<div class="field"><label>Date assigned</label><input id="assigned" type="date" required></div>
-<div class="field"><label>Due date</label><input id="due" type="date" required></div>
-<div class="field"><label>Estimated time (minutes)</label><input id="minutes" type="number" min="5" step="5" required placeholder="30"></div>
-<div class="field"><label>Priority</label><select id="priority"><option>Low</option><option selected>Medium</option><option>High</option></select></div>
-<div class="dialogfoot field full"><button type="button" class="iconbtn" id="cancelBtn">Cancel</button><button class="primary">Save assignment</button></div>
-</form></div></div>
-<script>
-const KEY='studyflow_tasks_v1', THEME='studyflow_dark_v1';
-const iso=d=>{const x=new Date(d);return new Date(x.getTime()-x.getTimezoneOffset()*60000).toISOString().slice(0,10)};
-const today=iso(new Date()), plus=n=>iso(new Date(Date.now()+n*864e5));
-let tasks=JSON.parse(localStorage.getItem(KEY)||'null')||[
-{id:'1',subject:'Math',name:'Quadratic equations practice',assigned:today,due:plus(0),minutes:50,priority:'High',done:false},
-{id:'2',subject:'English',name:'Read chapters 7–8',assigned:today,due:plus(1),minutes:35,priority:'Medium',done:false},
-{id:'3',subject:'Biology',name:'Cell lab report',assigned:plus(-1),due:plus(2),minutes:70,priority:'High',done:false},
-{id:'4',subject:'History',name:'Primary source notes',assigned:plus(-2),due:plus(4),minutes:30,priority:'Low',done:false}
-];
-let activeId=null, timerInterval=null, seconds=1500, breakMode=false;
-const save=()=>localStorage.setItem(KEY,JSON.stringify(tasks));
-const fmtDate=s=>new Date(s+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'});
-const priorityRank={High:0,Medium:1,Low:2};
-function render(){
- tasks.sort((a,b)=>a.due.localeCompare(b.due)||priorityRank[a.priority]-priorityRank[b.priority]);
- const done=tasks.filter(t=>t.done).length, total=tasks.length, pct=total?Math.round(done/total*100):0;
- const minutes=tasks.filter(t=>!t.done && t.due<=today).reduce((s,t)=>s+t.minutes,0);
- document.getElementById('timeStat').textContent=Math.floor(minutes/60)+'h '+String(minutes%60).padStart(2,'0')+'m';
- document.getElementById('progressStat').textContent=pct+'%'; document.getElementById('progressBar').style.width=pct+'%';
- document.getElementById('streak').textContent=(done?1:0)+' day'+(done===1?'':'s');
- document.getElementById('countLabel').textContent=total+' assignment'+(total===1?'':'s');
- document.getElementById('warning').innerHTML=minutes>180?'<div class="warning">⚠️ Over 3 hours due today. Consider splitting your workload.</div>':'';
- document.getElementById('taskList').innerHTML=tasks.length?tasks.map(t=>`<div class="task ${t.done?'done':''}">
- <input class="check" type="checkbox" ${t.done?'checked':''} onchange="toggleTask('${t.id}')">
- <div><div class="taskname">${esc(t.name)}</div><div class="meta"><span>${esc(t.subject)}</span><span>Due ${fmtDate(t.due)}</span><span>${t.minutes} min</span><span class="pill ${t.priority.toLowerCase()}">${t.priority}</span></div>
- <div class="timer"><button onclick="startTaskTimer('${t.id}')">▶ Focus</button>${activeId===t.id?'<span>Timer attached</span>':''}</div></div>
- <div class="taskactions"><button onclick="editTask('${t.id}')">✎</button><button onclick="deleteTask('${t.id}')">×</button></div></div>`).join(''):'<div class="empty">You're all clear. Nice work!</div>';
- renderCalendar();
-}
-function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function toggleTask(id){const t=tasks.find(x=>x.id===id);t.done=!t.done;save();render()}
-function deleteTask(id){if(confirm('Delete this assignment?')){tasks=tasks.filter(t=>t.id!==id);save();render()}}
-function openModal(t){document.getElementById('modal').classList.add('open');document.getElementById('modalTitle').textContent=t?'Edit assignment':'Add assignment';['taskId','subject','name','assigned','due','minutes','priority'].forEach(k=>document.getElementById(k).value=t?(t[k]??''):k==='assigned'?today:k==='due'?today:k==='priority'?'Medium':'');}
-function editTask(id){openModal(tasks.find(t=>t.id===id))}
-function closeModal(){document.getElementById('modal').classList.remove('open')}
-document.getElementById('taskForm').onsubmit=e=>{e.preventDefault();const id=document.getElementById('taskId').value;const data={id:id||crypto.randomUUID(),subject:subject.value.trim(),name:name.value.trim(),assigned:assigned.value,due:due.value,minutes:+minutes.value,priority:priority.value,done:id?tasks.find(t=>t.id===id).done:false};if(id)tasks=tasks.map(t=>t.id===id?data:t);else tasks.push(data);save();closeModal();render()};
-document.getElementById('addBtn').onclick=()=>openModal();document.getElementById('closeModal').onclick=closeModal;document.getElementById('cancelBtn').onclick=closeModal;
-document.getElementById('themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem(THEME,document.body.classList.contains('dark'))};if(localStorage.getItem(THEME)==='true')document.body.classList.add('dark');
-function startTaskTimer(id){activeId=id;seconds=1500;breakMode=false;clearInterval(timerInterval);timerInterval=setInterval(tick,1000);render();document.getElementById('activeTimer').scrollIntoView({behavior:'smooth',block:'center'})}
-function tick(){seconds--;updateTimer();if(seconds<=0){clearInterval(timerInterval);breakMode=!breakMode;seconds=breakMode?300:1500;alert(breakMode?'Focus complete — take a 5-minute break!':'Break complete — back to focus!');if(!breakMode)timerInterval=setInterval(tick,1000);}}
-function updateTimer(){const m=Math.floor(seconds/60),s=seconds%60;document.getElementById('activeTimer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');document.getElementById('focusBtn').textContent=timerInterval?'Pause focus session':'Start focus session'}
-document.getElementById('focusBtn').onclick=()=>{if(timerInterval){clearInterval(timerInterval);timerInterval=null}else{timerInterval=setInterval(tick,1000)}updateTimer()};
-function renderCalendar(){const c=document.getElementById('calendar'), d=new Date();const day=d.getDay();const monday=new Date(d);monday.setDate(d.getDate()-(day===0?6:day-1));c.innerHTML=Array.from({length:7},(_,i)=>{const x=new Date(monday);x.setDate(monday.getDate()+i);const key=iso(x);const ev=tasks.filter(t=>t.due===key).map(t=>`<div class="event" title="${esc(t.name)}">${esc(t.name)}</div>`).join('');return `<div class="day"><b>${x.toLocaleDateString(undefined,{weekday:'short'})}</b><br>${x.getDate()}${ev}</div>`}).join('')}
-document.getElementById('todayLabel').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
-render();updateTimer();
-</script>
-</body></html>
+
+  <!-- ASSIGNMENT MODAL -->
+  <div
+    class="modal-backdrop"
+    id="assignmentModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <h2 id="modalTitle">
+          Add assignment
+        </h2>
+
+        <button
+          class="icon-button"
+          id="closeModalButton"
+          type="button"
+          aria-label="Close modal"
+        >
+          ×
+        </button>
+
+      </div>
+
+      <form id="assignmentForm">
+
+        <input
+          type="hidden"
+          id="editingId"
+        />
+
+        <div class="form-grid">
+
+          <div class="field">
+
+            <label for="subject">
+              Subject
+            </label>
+
+            <input
+              id="subject"
+              type="text"
+              list="subjects"
+              placeholder="e.g. Biology"
+              required
+            />
+
+            <datalist id="subjects">
+              <option value="Math"></option>
+              <option value="English"></option>
+              <option value="Science"></option>
+              <option value="Biology"></option>
+              <option value="History"></option>
+              <option value="Language"></option>
+              <option value="Art"></option>
+            </datalist>
+
+          </div>
+
+          <div class="field">
+
+            <label for="assignmentName">
+              Assignment name
+            </label>
+
+            <input
+              id="assignmentName"
+              type="text"
+              placeholder="e.g. Chapter 4 worksheet"
+              required
+            />
+
+          </div>
+
+          <div class="field">
+
+            <label for="assignedDate">
+              Date assigned
+            </label>
+
+            <input
+              id="assignedDate"
+              type="date"
+              required
+            />
+
+          </div>
+
+          <div class="field">
+
+            <label for="dueDate">
+              Due date
+            </label>
+
+            <input
+              id="dueDate"
+              type="date"
+              required
+            />
+
+          </div>
+
+          <div class="field">
+
+            <label for="estimatedTime">
+              Estimated completion time
+            </label>
+
+            <input
+              id="estimatedTime"
+              type="number"
+              min="5"
+              step="5"
+              placeholder="30"
+              required
+            />
+
+          </div>
+
+          <div class="field">
+
+            <label for="priority">
+              Priority
+            </label>
+
+            <select id="priority">
+
+              <option value="Low">
+                Low
+              </option>
+
+              <option value="Medium" selected>
+                Medium
+              </option>
+
+              <option value="High">
+                High
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+          <button
+            class="button secondary"
+            id="cancelModalButton"
+            type="button"
+          >
+            Cancel
+          </button>
+
+          <button
+            class="button primary"
+            type="submit"
+          >
+            Save assignment
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+  <script>
+    "use strict";
+
+    /* =========================================================
+       STUDYFLOW APPLICATION
+       ========================================================= */
+
+    const TASK_STORAGE_KEY = "studyflow.tasks";
+    const THEME_STORAGE_KEY = "studyflow.theme";
+
+    const $ = (selector) =>
+      document.querySelector(selector);
+
+    const $$ = (selector) =>
+      document.querySelectorAll(selector);
+
+    /* ---------------------------------------------------------
+       DATE HELPERS
+       --------------------------------------------------------- */
+
+    function getTodayISO() {
+      const date = new Date();
+
+      const localDate = new Date(
+        date.getTime() -
+        date.getTimezoneOffset() * 60000
+      );
+
+      return localDate
+        .toISOString()
+        .slice(0, 10);
+    }
+
+    function getDateAfterDays(days) {
+      const date = new Date();
+
+      date.setDate(
+        date.getDate() + days
+      );
+
+      const localDate = new Date(
+        date.getTime() -
+        date.getTimezoneOffset() * 60000
+      );
+
+      return localDate
+        .toISOString()
+        .slice(0, 10);
+    }
+
+    function formatDate(dateString) {
+      return new Date(
+        dateString + "T12:00:00"
+      ).toLocaleDateString(
+        undefined,
+        {
+          month: "short",
+          day: "numeric"
+        }
+      );
+    }
+
+    /* ---------------------------------------------------------
+       ID + SECURITY HELPERS
+       --------------------------------------------------------- */
+
+    function createId() {
+      return (
+        Date.now().toString(36) +
+        Math.random()
+          .toString(36)
+          .substring(2)
+      );
+    }
+
+    function escapeHTML(value) {
+      const element =
+        document.createElement("div");
+
+      element.textContent = value;
+
+      return element.innerHTML;
+    }
+
+    /* ---------------------------------------------------------
+       DEMO DATA
+       --------------------------------------------------------- */
+
+    function getDemoTasks() {
+      return [
+        {
+          id: createId(),
+          subject: "Math",
+          name: "Quadratic equations practice",
+          assigned: getTodayISO(),
+          due: getTodayISO(),
+          minutes: 50,
+          priority: "High",
+          completed: false
+        },
+
+        {
+          id: createId(),
+          subject: "English",
+          name: "Read chapters 7–8",
+          assigned: getTodayISO(),
+          due: getDateAfterDays(1),
+          minutes: 35,
+          priority: "Medium",
+          completed: false
+        },
+
+        {
+          id: createId(),
+          subject: "Biology",
+          name: "Cell lab report",
+          assigned: getDateAfterDays(-1),
+          due: getDateAfterDays(2),
+          minutes: 70,
+          priority: "High",
+          completed: false
+        },
+
+        {
+          id: createId(),
+          subject: "History",
+          name: "Primary source notes",
+          assigned: getDateAfterDays(-2),
+          due: getDateAfterDays(4),
+          minutes: 30,
+          priority: "Low",
+          completed: false
+        }
+      ];
+    }
+
+    /* ---------------------------------------------------------
+       STORAGE
+       --------------------------------------------------------- */
+
+    function loadTasks() {
+      try {
+        const saved =
+          localStorage.getItem(
+            TASK_STORAGE_KEY
+          );
+
+        if (!saved) {
+          const demo = getDemoTasks();
+
+          localStorage.setItem(
+            TASK_STORAGE_KEY,
+            JSON.stringify(demo)
+          );
+
+          return demo;
+        }
+
+        const parsed = JSON.parse(saved);
+
+        if (!Array.isArray(parsed)) {
+          throw new Error(
+            "Invalid task data"
+          );
+        }
+
+        return parsed;
+
+      } catch (error) {
+        console.error(error);
+
+        const demo = getDemoTasks();
+
+        localStorage.setItem(
+          TASK_STORAGE_KEY,
+          JSON.stringify(demo)
+        );
+
+        return demo;
+      }
+    }
+
+    function saveTasks() {
+      localStorage.setItem(
+        TASK_STORAGE_KEY,
+        JSON.stringify(tasks)
+      );
+    }
+
+    let tasks = loadTasks();
+
+    /* ---------------------------------------------------------
+       MODAL
+       --------------------------------------------------------- */
+
+    const modal =
+      $("#assignmentModal");
+
+    const assignmentForm =
+      $("#assignmentForm");
+
+    function openAddModal() {
+      assignmentForm.reset();
+
+      $("#editingId").value = "";
+
+      $("#modalTitle").textContent =
+        "Add assignment";
+
+      $("#assignedDate").value =
+        getTodayISO();
+
+      $("#dueDate").value =
+        getTodayISO();
+
+      $("#priority").value =
+        "Medium";
+
+      modal.classList.add("open");
+
+      setTimeout(() => {
+        $("#subject").focus();
+      }, 50);
+    }
+
+    function openEditModal(task) {
+      $("#modalTitle").textContent =
+        "Edit assignment";
+
+      $("#editingId").value =
+        task.id;
+
+      $("#subject").value =
+        task.subject;
+
+      $("#assignmentName").value =
+        task.name;
+
+      $("#assignedDate").value =
+        task.assigned;
+
+      $("#dueDate").value =
+        task.due;
+
+      $("#estimatedTime").value =
+        task.minutes;
+
+      $("#priority").value =
+        task.priority;
+
+      modal.classList.add("open");
+
+      setTimeout(() => {
+        $("#subject").focus();
+      }, 50);
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+
+      assignmentForm.reset();
+
+      $("#editingId").value = "";
+    }
+
+    $("#addAssignmentButton")
+      .addEventListener(
+        "click",
+        openAddModal
+      );
+
+    $("#closeModalButton")
+      .addEventListener(
+        "click",
+        closeModal
+      );
+
+    $("#cancelModalButton")
+      .addEventListener(
+        "click",
+        closeModal
+      );
+
+    modal.addEventListener(
+      "click",
+      (event) => {
+        if (
+          event.target === modal
+        ) {
+          closeModal();
+        }
+      }
+    );
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        if (
+          event.key === "Escape" &&
+          modal.classList.contains("open")
+        ) {
+          closeModal();
+        }
+      }
+    );
+
+    /* ---------------------------------------------------------
+       FORM SUBMISSION
+       --------------------------------------------------------- */
+
+    assignmentForm.addEventListener(
+      "submit",
+      (event) => {
+        event.preventDefault();
+
+        const editingId =
+          $("#editingId").value;
+
+        const subject =
+          $("#subject").value.trim();
+
+        const name =
+          $("#assignmentName")
+            .value.trim();
+
+        const assigned =
+          $("#assignedDate").value;
+
+        const due =
+          $("#dueDate").value;
+
+        const minutes =
+          Number(
+            $("#estimatedTime").value
+          );
+
+        const priority =
+          $("#priority").value;
+
+        if (
+          !subject ||
+          !name ||
+          !assigned ||
+          !due ||
+          !minutes ||
+          minutes < 5
+        ) {
+          alert(
+            "Please complete all assignment fields."
+          );
+
+          return;
+        }
+
+        if (due < assigned) {
+          alert(
+            "The due date cannot be before the assigned date."
+          );
+
+          return;
+        }
+
+        if (editingId) {
+          const existing =
+            tasks.find(
+              (task) =>
+                task.id === editingId
+            );
+
+          if (!existing) {
+            return;
+          }
+
+          existing.subject =
+            subject;
+
+          existing.name =
+            name;
+
+          existing.assigned =
+            assigned;
+
+          existing.due =
+            due;
+
+          existing.minutes =
+            minutes;
+
+          existing.priority =
+            priority;
+
+        } else {
+          tasks.push({
+            id: createId(),
+            subject,
+            name,
+            assigned,
+            due,
+            minutes,
+            priority,
+            completed: false
+          });
+        }
+
+        saveTasks();
+
+        closeModal();
+
+        render();
+      }
+    );
+
+    /* ---------------------------------------------------------
+       TASK OPERATIONS
+       --------------------------------------------------------- */
+
+    function toggleTask(id) {
+      const task =
+        tasks.find(
+          (item) => item.id === id
+        );
+
+      if (!task) return;
+
+      task.completed =
+        !task.completed;
+
+      saveTasks();
+
+      render();
+    }
+
+    function deleteTask(id) {
+      const task =
+        tasks.find(
+          (item) => item.id === id
+        );
+
+      if (!task) return;
+
+      const confirmed =
+        window.confirm(
+          `Delete "${task.name}"?`
+        );
+
+      if (!confirmed) return;
+
+      tasks =
+        tasks.filter(
+          (item) => item.id !== id
+        );
+
+      saveTasks();
+
+      render();
+    }
+
+    function editTask(id) {
+      const task =
+        tasks.find(
+          (item) => item.id === id
+        );
+
+      if (!task) return;
+
+      openEditModal(task);
+    }
+
+    /* ---------------------------------------------------------
+       SORTING
+       --------------------------------------------------------- */
+
+    const priorityRank = {
+      High: 0,
+      Medium: 1,
+      Low: 2
+    };
+
+    function getSortedTasks() {
+      return [...tasks].sort(
+        (a, b) => {
+
+          if (
+            a.completed !==
+            b.completed
+          ) {
+            return a.completed
+              ? 1
+              : -1;
+          }
+
+          const due =
+            a.due.localeCompare(
+              b.due
+            );
+
+          if (due !== 0) {
+            return due;
+          }
+
+          return (
+            priorityRank[a.priority] -
+            priorityRank[b.priority]
+          );
+        }
+      );
+    }
+
+    /* ---------------------------------------------------------
+       RENDER TASKS
+       --------------------------------------------------------- */
+
+    function renderTasks() {
+      const taskList =
+        $("#taskList");
+
+      const sorted =
+        getSortedTasks();
+
+      if (sorted.length === 0) {
+        taskList.innerHTML = `
+          <div class="empty">
+            <strong>You're all clear!</strong><br>
+            Add an assignment to get started.
+          </div>
+        `;
+
+        return;
+      }
+
+      taskList.innerHTML =
+        sorted
+          .map((task) => {
+
+            return `
+              <article
+                class="task ${
+                  task.completed
+                    ? "completed"
+                    : ""
+                }"
+                data-id="${escapeHTML(task.id)}"
+              >
+
+                <input
+                  class="checkbox"
+                  type="checkbox"
+                  data-action="toggle"
+                  ${
+                    task.completed
+                      ? "checked"
+                      : ""
+                  }
+                  aria-label="Complete assignment"
+                />
+
+                <div>
+
+                  <div class="task-name">
+                    ${escapeHTML(
+                      task.name
+                    )}
+                  </div>
+
+                  <div class="task-meta">
+
+                    <span>
+                      ${escapeHTML(
+                        task.subject
+                      )}
+                    </span>
+
+                    <span>•</span>
+
+                    <span>
+                      Due ${formatDate(
+                        task.due
+                      )}
+                    </span>
+
+                    <span>•</span>
+
+                    <span>
+                      ${task.minutes} min
+                    </span>
+
+                    <span
+                      class="pill ${task.priority.toLowerCase()}"
+                    >
+                      ${escapeHTML(
+                        task.priority
+                      )}
+                    </span>
+
+                  </div>
+
+                  <button
+                    class="focus-task"
+                    type="button"
+                    data-action="focus"
+                  >
+                    ▶ Focus
+                  </button>
+
+                </div>
+
+                <div class="task-actions">
+
+                  <button
+                    type="button"
+                    data-action="edit"
+                    title="Edit assignment"
+                  >
+                    ✎
+                  </button>
+
+                  <button
+                    type="button"
+                    class="delete"
+                    data-action="delete"
+                    title="Delete assignment"
+                  >
+                    ×
+                  </button>
+
+                </div>
+
+              </article>
+            `;
+          })
+          .join("");
+    }
+
+    /* ---------------------------------------------------------
+       TASK EVENT DELEGATION
+       --------------------------------------------------------- */
+
+    $("#taskList").addEventListener(
+      "click",
+      (event) => {
+
+        const button =
+          event.target.closest(
+            "[data-action]"
+          );
+
+        if (!button) return;
+
+        const taskElement =
+          button.closest(
+            "[data-id]"
+          );
+
+        if (!taskElement) return;
+
+        const id =
+          taskElement.dataset.id;
+
+        const action =
+          button.dataset.action;
+
+        if (action === "edit") {
+          editTask(id);
+        }
+
+        if (action === "delete") {
+          deleteTask(id);
+        }
+
+        if (action === "focus") {
+          startTaskFocus(id);
+        }
+      }
+    );
+
+    $("#taskList").addEventListener(
+      "change",
+      (event) => {
+
+        if (
+          !event.target.matches(
+            '[data-action="toggle"]'
+          )
+        ) {
+          return;
+        }
+
+        const taskElement =
+          event.target.closest(
+            "[data-id]"
+          );
+
+        if (!taskElement) return;
+
+        toggleTask(
+          taskElement.dataset.id
+        );
+      }
+    );
+
+    /* ---------------------------------------------------------
+       STATISTICS
+       --------------------------------------------------------- */
+
+    function renderStats() {
+
+      const total =
+        tasks.length;
+
+      const completed =
+        tasks.filter(
+          (task) => task.completed
+        ).length;
+
+      const percentage =
+        total === 0
+          ? 0
+          : Math.round(
+              (completed / total) * 100
+            );
+
+      $("#progressText")
+        .textContent =
+        `${percentage}%`;
+
+      $("#progressBar")
+        .style.width =
+        `${percentage}%`;
+
+      $("#taskCount")
+        .textContent =
+        `${total} assignment${
+          total === 1
+            ? ""
+            : "s"
+        }`;
+
+      const today =
+        getTodayISO();
+
+      const todayMinutes =
+        tasks
+          .filter(
+            (task) =>
+              !task.completed &&
+              task.due === today
+          )
+          .reduce(
+            (sum, task) =>
+              sum + Number(task.minutes),
+            0
+          );
+
+      const hours =
+        Math.floor(
+          todayMinutes / 60
+        );
+
+      const minutes =
+        todayMinutes % 60;
+
+      $("#studyTime")
+        .textContent =
+        `${hours}h ${String(
+          minutes
+        ).padStart(2, "0")}m`;
+
+      if (
+        todayMinutes > 180
+      ) {
+        $("#workloadWarning")
+          .innerHTML = `
+            <span class="warning">
+              ⚠️ Over 3 hours due today
+            </span>
+          `;
+      } else {
+        $("#workloadWarning")
+          .innerHTML = "";
+      }
+
+      const completedToday =
+        tasks.some(
+          (task) =>
+            task.completed &&
+            task.due === today
+        );
+
+      $("#streakText")
+        .textContent =
+        completedToday
+          ? "1 day"
+          : "0 days";
+    }
+
+    /* ---------------------------------------------------------
+       CALENDAR
+       --------------------------------------------------------- */
+
+    function renderCalendar() {
+
+      const calendar =
+        $("#calendar");
+
+      calendar.innerHTML = "";
+
+      const current =
+        new Date();
+
+      const day =
+        current.getDay();
+
+      const monday =
+        new Date(current);
+
+      monday.setDate(
+        current.getDate() -
+        (day === 0
+          ? 6
+          : day - 1)
+      );
+
+      const dayNames = [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+        "Sun"
+      ];
+
+      for (
+        let index = 0;
+        index < 7;
+        index++
+      ) {
+
+        const date =
+          new Date(monday);
+
+        date.setDate(
+          monday.getDate() +
+          index
+        );
+
+        const local =
+          new Date(
+            date.getTime() -
+            date.getTimezoneOffset() *
+              60000
+          );
+
+        const iso =
+          local
+            .toISOString()
+            .slice(0, 10);
+
+        const dayElement =
+          document.createElement(
+            "div"
+          );
+
+        dayElement.className =
+          "day";
+
+        if (
+          iso === getTodayISO()
+        ) {
+          dayElement.classList.add(
+            "today"
+          );
+        }
+
+        const events =
+          tasks
+            .filter(
+              (task) =>
+                task.due === iso
+            )
+            .map(
+              (task) => `
+                <div
+                  class="event"
+                  title="${escapeHTML(
+                    task.name
+                  )}"
+                >
+                  ${escapeHTML(
+                    task.name
+                  )}
+                </div>
+              `
+            )
+            .join("");
+
+        dayElement.innerHTML = `
+          <div class="day-name">
+            ${dayNames[index]}
+          </div>
+
+          <div class="day-number">
+            ${date.getDate()}
+          </div>
+
+          ${events}
+        `;
+
+        calendar.appendChild(
+          dayElement
+        );
+      }
+    }
+
+    /* ---------------------------------------------------------
+       DARK MODE
+       --------------------------------------------------------- */
+
+    function loadTheme() {
+
+      const theme =
+        localStorage.getItem(
+          THEME_STORAGE_KEY
+        );
+
+      if (theme === "dark") {
+        document.body.classList.add(
+          "dark"
+        );
+      }
+    }
+
+    $("#darkModeButton")
+      .addEventListener(
+        "click",
+        () => {
+
+          document.body.classList.toggle(
+            "dark"
+          );
+
+          const dark =
+            document.body.classList.contains(
+              "dark"
+            );
+
+          localStorage.setItem(
+            THEME_STORAGE_KEY,
+            dark
+              ? "dark"
+              : "light"
+          );
+        }
+      );
+
+    /* ---------------------------------------------------------
+       NAVIGATION
+       --------------------------------------------------------- */
+
+    $$(".nav button").forEach(
+      (button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            $$(".nav button")
+              .forEach(
+                (item) =>
+                  item.classList.remove(
+                    "active"
+                  )
+              );
+
+            button.classList.add(
+              "active"
+            );
+
+            const view =
+              button.dataset.view;
+
+            if (
+              view === "today"
+            ) {
+
+              render();
+
+              $("#checklistSection")
+                .scrollIntoView({
+                  behavior: "smooth"
+                });
+
+            }
+
+            if (
+              view === "calendar"
+            ) {
+
+              $("#calendarSection")
+                .scrollIntoView({
+                  behavior: "smooth"
+                });
+
+            }
+
+            if (
+              view === "completed"
+            ) {
+
+              showCompletedTasks();
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+    function showCompletedTasks() {
+
+      const list =
+        $("#taskList");
+
+      const completed =
+        tasks.filter(
+          (task) =>
+            task.completed
+        );
+
+      if (
+        completed.length === 0
+      ) {
+
+        list.innerHTML = `
+          <div class="empty">
+            No completed assignments yet.
+          </div>
+        `;
+
+      } else {
+
+        list.innerHTML =
+          completed
+            .map(
+              (task) => `
+                <article
+                  class="task completed"
+                  data-id="${escapeHTML(
+                    task.id
+                  )}"
+                >
+
+                  <input
+                    class="checkbox"
+                    type="checkbox"
+                    checked
+                    data-action="toggle"
+                  />
+
+                  <div>
+
+                    <div class="task-name">
+                      ${escapeHTML(
+                        task.name
+                      )}
+                    </div>
+
+                    <div class="task-meta">
+
+                      <span>
+                        ${escapeHTML(
+                          task.subject
+                        )}
+                      </span>
+
+                      <span>•</span>
+
+                      <span>
+                        ${task.minutes} min
+                      </span>
+
+                      <span class="pill low">
+                        Completed
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </article>
+              `
+            )
+            .join("");
+      }
+
+      $("#checklistSection")
+        .scrollIntoView({
+          behavior: "smooth"
+        });
+    }
+
+    /* ---------------------------------------------------------
+       POMODORO TIMER
+       --------------------------------------------------------- */
+
+    const FOCUS_TIME =
+      25 * 60;
+
+    const BREAK_TIME =
+      5 * 60;
+
+    let timerSeconds =
+      FOCUS_TIME;
+
+    let timerInterval =
+      null;
+
+    let timerRunning =
+      false;
+
+    let timerMode =
+      "focus";
+
+    let activeTaskId =
+      null;
+
+    function updateTimerDisplay() {
+
+      const minutes =
+        Math.floor(
+          timerSeconds / 60
+        );
+
+      const seconds =
+        timerSeconds % 60;
+
+      $("#timerDisplay")
+        .textContent =
+        `${String(
+          minutes
+        ).padStart(2, "0")}:${String(
+          seconds
+        ).padStart(2, "0")}`;
+
+      $("#timerStartButton")
+        .textContent =
+        timerRunning
+          ? "Pause"
+          : "Start";
+
+      if (
+        timerMode === "focus"
+      ) {
+
+        if (activeTaskId) {
+
+          const task =
+            tasks.find(
+              (item) =>
+                item.id ===
+                activeTaskId
+            );
+
+          $("#timerMode")
+            .textContent =
+            task
+              ? `Focusing: ${task.name}`
+              : "Focus session";
+
+        } else {
+
+          $("#timerMode")
+            .textContent =
+            "Ready to focus";
+        }
+
+      } else {
+
+        $("#timerMode")
+          .textContent =
+          "Take a 5-minute break";
+      }
+    }
+
+    function startTimer() {
+
+      if (timerRunning) {
+        return;
+      }
+
+      timerRunning = true;
+
+      timerInterval =
+        setInterval(
+          () => {
+
+            timerSeconds--;
+
+            updateTimerDisplay();
+
+            if (
+              timerSeconds <= 0
+            ) {
+
+              clearInterval(
+                timerInterval
+              );
+
+              timerInterval =
+                null;
+
+              timerRunning =
+                false;
+
+              if (
+                timerMode ===
+                "focus"
+              ) {
+
+                timerMode =
+                  "break";
+
+                timerSeconds =
+                  BREAK_TIME;
+
+                alert(
+                  "Focus session complete! Take a 5-minute break."
+                );
+
+              } else {
+
+                timerMode =
+                  "focus";
+
+                timerSeconds =
+                  FOCUS_TIME;
+
+                alert(
+                  "Break complete! Ready for another focus session."
+                );
+              }
+
+              updateTimerDisplay();
+            }
+
+          },
+          1000
+        );
+
+      updateTimerDisplay();
+    }
+
+    function pauseTimer() {
+
+      if (
+        timerInterval !== null
+      ) {
+
+        clearInterval(
+          timerInterval
+        );
+
+        timerInterval =
+          null;
+      }
+
+      timerRunning =
+        false;
+
+      updateTimerDisplay();
+    }
+
+    function resetTimer() {
+
+      if (
+        timerInterval !== null
+      ) {
+
+        clearInterval(
+          timerInterval
+        );
+      }
+
+      timerInterval =
+        null;
+
+      timerRunning =
+        false;
+
+      timerMode =
+        "focus";
+
+      timerSeconds =
+        FOCUS_TIME;
+
+      activeTaskId =
+        null;
+
+      updateTimerDisplay();
+    }
+
+    function startTaskFocus(id) {
+
+      activeTaskId =
+        id;
+
+      timerMode =
+        "focus";
+
+      timerSeconds =
+        FOCUS_TIME;
+
+      if (
+        timerInterval !== null
+      ) {
+
+        clearInterval(
+          timerInterval
+        );
+      }
+
+      timerInterval =
+        null;
+
+      timerRunning =
+        false;
+
+      updateTimerDisplay();
+
+      startTimer();
+
+      document
+        .querySelector(
+          ".timer"
+        )
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+    }
+
+    $("#timerStartButton")
+      .addEventListener(
+        "click",
+        () => {
+
+          if (timerRunning) {
+            pauseTimer();
+          } else {
+            startTimer();
+          }
+
+        }
+      );
+
+    $("#timerResetButton")
+      .addEventListener(
+        "click",
+        resetTimer
+      );
+
+    /* ---------------------------------------------------------
+       INITIALIZATION
+       --------------------------------------------------------- */
+
+    function render() {
+      renderTasks();
+      renderStats();
+      renderCalendar();
+    }
+
+    function initialize() {
+
+      loadTheme();
+
+      $("#todayLabel")
+        .textContent =
+        new Date().toLocaleDateString(
+          undefined,
+          {
+            weekday: "long",
+            month: "long",
+            day: "numeric"
+          }
+        );
+
+      updateTimerDisplay();
+
+      render();
+    }
+
+    initialize();
+
+  </script>
+
+</body>
+</html>
+```
+
